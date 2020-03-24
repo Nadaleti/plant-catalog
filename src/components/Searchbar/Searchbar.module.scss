@@ -9,10 +9,10 @@
   background-color: #ffffff;
   width: 100%;
   box-sizing: border-box;
-  padding: 0 10px;
+  padding-left: 10px;
   height: 100%;
   
-  input {
+  >input {
     width: 100%;
     background-color: transparent;
     border-color: transparent;
@@ -21,19 +21,27 @@
     outline: none;
 
     @include extra-small-devices {
-      &:focus + .SearchIcon {
-        font-size: 1.3rem;
+      font-size: .9rem;
+
+      &:focus + .SearchButton {
+        font-size: 1.1rem;
+        width: 3rem;
       }
     }
-
   }
 
-  .SearchIcon {
-    padding-left: .5rem;
-    margin-left: .5rem;
-    border-left: $dark-grey solid 1px;
-    color: $dark-grey;
-    cursor: pointer;
+  >.SearchButton {
+    width: 2.5rem;
+    height: 100%;
+    border: none;
+    background-color: #fff;
     font-size: 1rem;
+    text-align: center;
+
+    .SearchIcon {
+      color: $dark-grey;
+      cursor: pointer;
+      font-size: inherit;
+    }
   }
 }
