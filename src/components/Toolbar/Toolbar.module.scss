@@ -1,0 +1,15 @@
+.Toolbar {
+  width: 100%;
+  height: 3rem;
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  background-color: #3fa13d;
+  padding: 0 1rem;
+  box-sizing: border-box;
+  
+  div {
+    display: flex;
+    margin-right: auto;
+  }
+}
