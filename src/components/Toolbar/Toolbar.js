@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import Searchbar from '../Searchbar/Searchbar';
+import SearchbarContext from '../../context/search-context';
 
 import classes from './Toolbar.module.scss';
 
@@ -26,6 +27,7 @@ class Toolbar extends Component {
 
     return (
       <header className={toolbarClasses.join(' ')}>
+      <SearchbarContext.Provider value={{submit: (event) => {event.preventDefault(); alert('something');}}} />
         <div className={classes.Logo}>logo</div>
         <div className={classes.Searchbar}>
           <Searchbar
