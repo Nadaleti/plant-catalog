@@ -10,7 +10,7 @@ const searchbar = (props) => {
     <div className={classes.Searchbar}>
       <input type="text"
         onFocus={props.focused} onBlur={props.blur}
-        placeholder="Search for some plant common name or scientific name..." />
+        placeholder="Plant common or scientific name..." />
       <FontAwesomeIcon icon={faSearch} className={classes.SearchIcon} />
     </div>
   )

@@ -1,4 +1,5 @@
 @import '../../styles/colors';
+@import '../../styles/media';
 
 .Searchbar {
   display: flex;
@@ -17,13 +18,21 @@
     border-color: transparent;
     color: $faded-text;
     font-size: 1rem;
+    outline: none;
+
+    @include extra-small-devices {
+      &:focus + .SearchIcon {
+        font-size: 1.3rem;
+      }
+    }
+
   }
 
   .SearchIcon {
-    padding-left: .3rem;
-    margin-left: .3rem;
-    border-left: $faded-text solid 1px;
-    color: $faded-text;
+    padding-left: .5rem;
+    margin-left: .5rem;
+    border-left: $dark-grey solid 1px;
+    color: $dark-grey;
     cursor: pointer;
     font-size: 1rem;
   }

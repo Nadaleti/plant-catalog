@@ -21,7 +21,7 @@ class Toolbar extends Component {
     let toolbarClasses = [classes.Toolbar];
 
     if (this.state.searchbarFocused) {
-      toolbarClasses.push(classes.SearchbarFocus);
+      toolbarClasses.push(classes.SearchbarActive);
     }
 
     return (
