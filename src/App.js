@@ -1,14 +1,13 @@
 import React from 'react';
 
-import Toolbar from './components/Toolbar/Toolbar';
+import PlantCatalog from './components/containers/PlantCatalog/PlantCatalog';
 
 import classes from './App.module.scss';
 
 function App() {
   return (
     <div className={classes.App}>
-      <Toolbar />
-      <div>Plants catalog</div>
+      <PlantCatalog />
     </div>
   );
 }
