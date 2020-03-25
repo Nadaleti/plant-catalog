@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import Searchbar from '../Searchbar/Searchbar';
-import SearchbarContext from '../../context/search-context';
+import SearchbarContext from '../../context/catalog-context';
 
 import classes from './Toolbar.module.scss';
 

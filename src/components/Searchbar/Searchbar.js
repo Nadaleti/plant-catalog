@@ -3,23 +3,27 @@ import React, { Component } from 'react';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import SearchContext from '../../context/search-context';
+import CatalogContext from '../../context/catalog-context';
 
 import classes from './Searchbar.module.scss';
 
 class Searchbar extends Component {
   plantName = null;
 
-  static contextType = SearchContext;
+  static contextType = CatalogContext;
   
   inputChangeHandler = (event) => {
-    this.plantName = event.target.value;
+    this.context.updatePlantName(event.target.value);
+  }
+
+  searchSubmitHandler = (event) => {
+    event.preventDefault();
+    this.context.submit();
   }
 
   render() {
     return (
-      <form className={classes.Searchbar} onSubmit={(event) => this.context.submit(event, this.plantName)}>
-        <SearchContext.Provider value={{ plantName: this.plantName }} />
+      <form className={classes.Searchbar} onSubmit={(event) => this.searchSubmitHandler(event)}>
         <input type="text"
           onFocus={this.props.focused} onBlur={this.props.blur}
           onInput={(event) => this.inputChangeHandler(event)}
