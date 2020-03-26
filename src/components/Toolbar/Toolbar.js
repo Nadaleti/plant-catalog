@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { faSeedling } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import Searchbar from '../Searchbar/Searchbar';
 
@@ -26,7 +28,9 @@ class Toolbar extends Component {
 
     return (
       <header className={toolbarClasses.join(' ')}>
-        <div className={classes.Logo}>logo</div>
+        <div className={classes.Logo}>
+          <FontAwesomeIcon icon={faSeedling} />
+        </div>
         <div className={classes.Searchbar}>
           <Searchbar
             focused={this.searchbarFocusHandler}
