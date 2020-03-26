@@ -13,7 +13,7 @@ export default class PlantCatalog extends Component {
   };
 
   shouldComponentUpdate(_, nextState) {
-    return nextState.plants != this.plants;
+    return nextState.plants !== this.plants;
   }
 
   plantNameUpdateHandler = (plantName) => {
