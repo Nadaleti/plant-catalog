@@ -1,0 +1,47 @@
+@import '../../styles/colors';
+@import '../../styles/media';
+
+.Searchbar {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+  width: 100%;
+  box-sizing: border-box;
+  padding-left: 10px;
+  height: 100%;
+  
+  >input {
+    width: 100%;
+    background-color: transparent;
+    border-color: transparent;
+    color: $faded-text;
+    font-size: 1rem;
+    outline: none;
+
+    @include extra-small-devices {
+      font-size: .9rem;
+
+      &:focus + .SearchButton {
+        font-size: 1.1rem;
+        width: 4rem;
+      }
+    }
+  }
+
+  >.SearchButton {
+    width: 2.5rem;
+    height: 100%;
+    border: none;
+    background-color: #fff;
+    font-size: 1rem;
+    text-align: center;
+
+    .SearchIcon {
+      color: $dark-grey;
+      cursor: pointer;
+      font-size: inherit;
+    }
+  }
+}

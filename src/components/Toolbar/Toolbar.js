@@ -1,14 +1,40 @@
-import React from 'react';
+import React, { Component } from 'react';
+
+import Searchbar from '../Searchbar/Searchbar';
 
 import classes from './Toolbar.module.scss';
 
-const toolbar = () => {
-  return (
-    <header className={classes.Toolbar}>
-      <div>logo</div>
-      <div>searchbar</div>
-    </header>
-  )
+class Toolbar extends Component {
+  state = {
+    searchbarFocused: false
+  }
+
+  searchbarBlurHandler = () => {
+    this.setState({searchbarFocused: false});
+  }
+
+  searchbarFocusHandler = () => {
+    this.setState({searchbarFocused: true});
+  }
+
+  render() {
+    let toolbarClasses = [classes.Toolbar];
+
+    if (this.state.searchbarFocused) {
+      toolbarClasses.push(classes.SearchbarActive);
+    }
+
+    return (
+      <header className={toolbarClasses.join(' ')}>
+        <div className={classes.Logo}>logo</div>
+        <div className={classes.Searchbar}>
+          <Searchbar
+            focused={this.searchbarFocusHandler}
+            blur={this.searchbarBlurHandler} />
+        </div>
+      </header>
+    )
+  }
 }
 
-export default toolbar;
+export default Toolbar;
