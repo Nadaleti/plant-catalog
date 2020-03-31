@@ -6,7 +6,7 @@ import classes from './Filters.module.scss';
 // Each component which use Filters should declare its own filters
 const filters = (props) => {
   return (
-    <div>
+    <div className={classes.Filters}>
       {props.children}
     </div>
   )

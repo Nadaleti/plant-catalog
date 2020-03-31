@@ -1,0 +1,14 @@
+.FixedItems {
+  text-align: left;
+  width: 100%;
+  list-style-type: none;
+
+  li {
+    margin-bottom: .2rem;
+    cursor: pointer;
+
+    &.SeeAllItem {
+      color: #18439e;
+    }
+  }
+}

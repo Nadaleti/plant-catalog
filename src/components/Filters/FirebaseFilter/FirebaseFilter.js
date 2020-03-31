@@ -1,19 +1,30 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
+import Filter from '../Filter/Filter';
 import firebase from '../../../firebase';
+import FirebaseFilterSuggestion from './FirebaseFilterSuggestion/FirebaseFilterSuggestion';
+import Modal from '../../UI/Modal/Modal';
+
+import classes from './FirebaseFilter.module.scss';
 
 const NUMBER_OF_ITEMS = 20;
 const WAIT_INTERVAL = 1000;
 
 export default class FirebaseFilter extends Component {
   collectionRef = firebase.firestore().collection(this.props.collection);
+  fixedItems = null;
 
   state = {
     loading: false,
     loadedItems: [],
-    searchTerm: ''
+    searchTerm: '',
+    showSuggestionModal: false
   }
+
+  componentDidMount() {
+    this.loadItems();
+  } 
 
   getFirebaseQuery = () => {
     let query = this.collectionRef
@@ -54,11 +65,23 @@ export default class FirebaseFilter extends Component {
       .then((response) => {
         const loadedItems = response.docs.map((doc) => doc.data());
 
+        if (!this.fixedItems) {
+          this.fixedItems = loadedItems;
+        }
+
         this.setState({
           loading: false,
           loadedItems: loadedItems
         });
       });
+  }
+
+  seeAllClickHandler = () => {
+    this.setState({showSuggestionModal: true});
+  }
+
+  closeSuggestionModal = () => {
+    this.setState({showSuggestionModal: false});
   }
 
   toTitleCase = (sentence) => {
@@ -72,14 +95,22 @@ export default class FirebaseFilter extends Component {
   }
 
   render() {
+    const listFixedItems = this.fixedItems ?
+      this.fixedItems.map((item) => <li key={item.id}>{item.name}</li>) : null;
+
     return (
-      <div>
-        <input type="text"
-          onChange={(event) => this.inputChangeHandler(event.target.value)} />
-        {/* TODO: Handle first/after focusing again recommendations */}
-        {/* TODO: Recommended results for query */}
-        {/* TODO: Handle select a result event */}
-      </div>
+      <Fragment>
+        <Modal show={this.state.showSuggestionModal} closed={this.closeSuggestionModal}>
+          <FirebaseFilterSuggestion
+            changed={this.inputChangeHandler} />
+        </Modal>
+        <Filter>
+          <ul className={classes.FixedItems}>
+            {listFixedItems}
+            <li className={classes.SeeAllItem} onClick={this.seeAllClickHandler}>See all</li>
+          </ul>
+        </Filter>
+      </Fragment>
     )
   }
 }

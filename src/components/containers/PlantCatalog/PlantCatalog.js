@@ -37,7 +37,9 @@ export default class PlantCatalog extends Component {
         <CatalogContext.Provider value={providedContextFunctions}>
           <Toolbar />
           <div>SelectedFilters</div>
-          <div>Filters</div>
+          <Filters>
+            <FirebaseFilter collection='families' />
+          </Filters>
         </CatalogContext.Provider>
         <div>PlantsCardList</div>
       </div>
