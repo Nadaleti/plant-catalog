@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 
 import CatalogContext from '../../../context/catalog-context';
+import Filters from '../../Filters/Filters';
 import Toolbar from '../../Toolbar/Toolbar';
 
 import classes from './PlantCatalog.module.scss';
+import FirebaseFilter from '../../Filters/FirebaseFilter/FirebaseFilter';
 
 export default class PlantCatalog extends Component {
   state = {

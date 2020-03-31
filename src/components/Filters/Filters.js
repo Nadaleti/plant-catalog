@@ -2,10 +2,12 @@ import React from 'react';
 
 import classes from './Filters.module.scss';
 
-const filters = () => {
+// Component to handle desktop and mobile visualization
+// Each component which use Filters should declare its own filters
+const filters = (props) => {
   return (
     <div>
-      
+      {props.children}
     </div>
   )
 }
