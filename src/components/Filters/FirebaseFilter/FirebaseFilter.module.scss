@@ -1,12 +1,18 @@
+@import '../../../styles/colors';
+
 .FixedItems {
   width: 100%;
-  text-align: left;
   list-style-type: none;
   padding: 0;
 
   li {
-    margin-bottom: .2rem;
+    color: $dark-grey;
+    margin-bottom: .4rem;
     cursor: pointer;
+
+    &:hover {
+      color: black;
+    }
 
     &.SeeAllItem {
       color: #18439e;

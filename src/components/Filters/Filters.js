@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 import classes from './Filters.module.scss';
 
@@ -7,6 +7,7 @@ import classes from './Filters.module.scss';
 const filters = (props) => {
   return (
     <div className={classes.Filters}>
+      <h3>Filters</h3>
       {props.children}
     </div>
   )

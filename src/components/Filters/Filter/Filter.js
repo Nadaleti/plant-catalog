@@ -5,7 +5,7 @@ import classes from './Filter.module.scss';
 const filter = (props) => {
   return (
     <div className={classes.Filter}>
-      <label>{props.label}</label>
+      <p className={classes.Title}>{props.label}</p>
       {props.children}
     </div>
   )

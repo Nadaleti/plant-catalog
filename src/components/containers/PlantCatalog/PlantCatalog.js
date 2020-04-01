@@ -32,17 +32,23 @@ export default class PlantCatalog extends Component {
       updatePlantName: this.plantNameUpdateHandler
     }
 
+    const filters = <Filters>
+      <FirebaseFilter filterTitle='Families' collection='families' />
+      <FirebaseFilter filterTitle='Genuses' collection='genuses' />
+    </Filters>;
+
+    const dataContainer = <div className={classes.DataContainer}>
+      <div>SelectedFilters</div>
+      <div>PlantsCardList</div>
+    </div>;
+
     return (
       <div className={classes.PlantCatalog}>
         <CatalogContext.Provider value={providedContextFunctions}>
           <Toolbar />
           <main className={classes.Content}>
-            <div>SelectedFilters</div>
-            <Filters>
-              <FirebaseFilter filterTitle='Families' collection='families' />
-              <FirebaseFilter filterTitle='Genuses' collection='genuses' />
-            </Filters>
-            <div>PlantsCardList</div>
+            {filters}
+            {dataContainer}
           </main>
         </CatalogContext.Provider>
       </div>

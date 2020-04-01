@@ -1,8 +1,29 @@
+@import '../../../styles/media';
+
 .PlantCatalog {
   height: 100vh;
   
   .Content {
+    display: flex;
+    flex-flow: row;
+    max-width: 1200px;
     max-height: 90vh;
+    margin: 0 auto;
     overflow: auto;
+    padding-top: 40px;
+
+    >.DataContainer {
+      display: flex;
+      flex-flow: column;
+      align-items: center;
+      width: 100%;
+    }
+
+    @include below-extra-large-devices {
+      width: 100%;
+      padding-left: 50px;
+      padding-right: 50px;
+      box-sizing: border-box;
+    }
   }
 }

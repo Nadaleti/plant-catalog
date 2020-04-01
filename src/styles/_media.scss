@@ -32,3 +32,9 @@
     @content
   }
 };
+
+@mixin below-extra-large-devices() {
+  @media only screen and (max-width: 1230px) {
+    @content
+  }
+}
