@@ -19,7 +19,7 @@ export default class PlantCatalog extends Component {
   }
 
   plantNameUpdateHandler = (plantName) => {
-    this.setState({plantName: plantName});
+    this.setState({ plantName: plantName });
   }
 
   searchPlants = () => {
@@ -36,12 +36,14 @@ export default class PlantCatalog extends Component {
       <div className={classes.PlantCatalog}>
         <CatalogContext.Provider value={providedContextFunctions}>
           <Toolbar />
-          <div>SelectedFilters</div>
-          <Filters>
-            <FirebaseFilter collection='families' />
-          </Filters>
+          <main className={classes.Content}>
+            <div>SelectedFilters</div>
+            <Filters>
+              <FirebaseFilter collection='families' />
+            </Filters>
+            <div>PlantsCardList</div>
+          </main>
         </CatalogContext.Provider>
-        <div>PlantsCardList</div>
       </div>
     )
   }
