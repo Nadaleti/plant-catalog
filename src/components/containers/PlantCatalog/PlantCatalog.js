@@ -39,7 +39,8 @@ export default class PlantCatalog extends Component {
           <main className={classes.Content}>
             <div>SelectedFilters</div>
             <Filters>
-              <FirebaseFilter collection='families' />
+              <FirebaseFilter filterTitle='Families' collection='families' />
+              <FirebaseFilter filterTitle='Genuses' collection='genuses' />
             </Filters>
             <div>PlantsCardList</div>
           </main>
