@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Filter from '../Filter/Filter';
 import firebase from '../../../firebase';
 import FirebaseFilterSuggestion from './FirebaseFilterSuggestion/FirebaseFilterSuggestion';
-import ShowMoreFilterItems from '../ShowMoreFilterItems/ShowMoreFilterItems';
+import Modal from '../../UI/Modal/Modal';
 
 import classes from './FirebaseFilter.module.scss';
 
@@ -40,7 +40,7 @@ export default class FirebaseFilter extends Component {
     this.setState({showMoreFilterItems: true});
   }
 
-  hideMoreFilterItems = () => {
+  closeMoreFilterItems = () => {
     this.setState({showMoreFilterItems: false});
   }
 
@@ -55,10 +55,10 @@ export default class FirebaseFilter extends Component {
 
     return (
       <Fragment>
-        <ShowMoreFilterItems showMoreFilterItems={this.state.showMoreFilterItems}
-          hideMoreFilterItems={this.hideMoreFilterItems}>
+        <Modal show={this.state.showMoreFilterItems}
+          closed={this.closeMoreFilterItems}>
           <FirebaseFilterSuggestion collection={this.props.collection} />
-        </ShowMoreFilterItems>
+        </Modal>
         <Filter label={this.props.filterTitle}>
           <ul className={classes.FixedItems}>
             {fixedItemsList}
