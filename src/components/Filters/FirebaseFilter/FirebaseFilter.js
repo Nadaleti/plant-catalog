@@ -50,7 +50,7 @@ export default class FirebaseFilter extends Component {
     
     if (fixedItemsList) {
       fixedItemsList.push(
-        <li className={classes.SeeAllItem} onClick={this.seeAllClickHandler}>See all</li>);
+        <li key='see-all' className={classes.SeeAllItem} onClick={this.seeAllClickHandler}>See all</li>);
     }
 
     return (

@@ -1,17 +1,19 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 
 import CatalogContext from '../../../context/catalog-context';
 import Filters from '../../Filters/Filters';
+import FirebaseFilter from '../../Filters/FirebaseFilter/FirebaseFilter';
 import Toolbar from '../../Toolbar/Toolbar';
+import SideDrawer from '../../UI/SideDrawer/SideDrawer';
 
 import classes from './PlantCatalog.module.scss';
-import FirebaseFilter from '../../Filters/FirebaseFilter/FirebaseFilter';
 
 export default class PlantCatalog extends Component {
   state = {
     filters: {},
     plantName: null,
-    plants: null
+    plants: null,
+    showFilterSidedrawer: false
   };
 
   shouldComponentUpdate(_, nextState) {
@@ -26,19 +28,27 @@ export default class PlantCatalog extends Component {
     console.log(this.state);
   }
 
+  toggleFiltersSideDrawer = () => {
+    this.setState((prevState) => {
+      return {showFilterSidedrawer: !prevState.showFilterSidedrawer}
+    });
+  }
+
   render() {
     let providedContextFunctions = {
       submit: this.searchPlants,
       updatePlantName: this.plantNameUpdateHandler
     }
 
-    const filters = <Filters>
+    const filters = <Fragment>
       <FirebaseFilter filterTitle='Families' collection='families' />
       <FirebaseFilter filterTitle='Genuses' collection='genuses' />
-    </Filters>;
+    </Fragment>;
 
     const dataContainer = <div className={classes.DataContainer}>
       <div>SelectedFilters</div>
+      <button className={classes.FiltersButton}
+        onClick={this.toggleFiltersSideDrawer}>Filters</button>
       <div>PlantsCardList</div>
     </div>;
 
@@ -47,7 +57,12 @@ export default class PlantCatalog extends Component {
         <CatalogContext.Provider value={providedContextFunctions}>
           <Toolbar />
           <main className={classes.Content}>
-            {filters}
+            <SideDrawer
+              show={this.state.showFilterSidedrawer}
+              close={this.toggleFiltersSideDrawer}
+              title='Filter by'
+            >{filters}</SideDrawer>
+            <Filters>{filters}</Filters>
             {dataContainer}
           </main>
         </CatalogContext.Provider>

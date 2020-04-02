@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 
 import Modal from '../../UI/Modal/Modal';
 
-const MOBILE_WIDTH = 760;
+const MOBILE_WIDTH = 600;
 
 export default class ShowMoreFilterItems extends Component {
   state = {
