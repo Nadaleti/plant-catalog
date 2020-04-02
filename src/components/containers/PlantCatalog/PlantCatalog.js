@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 
 import CatalogContext from '../../../context/catalog-context';
+import FilterMobile from '../../Filters/FilterMobile/FilterMobile';
 import Filters from '../../Filters/Filters';
 import FirebaseFilter from '../../Filters/FirebaseFilter/FirebaseFilter';
 import Toolbar from '../../Toolbar/Toolbar';
@@ -40,9 +41,14 @@ export default class PlantCatalog extends Component {
       updatePlantName: this.plantNameUpdateHandler
     }
 
-    const filters = <Fragment>
+    const desktopFilters = <Fragment>
       <FirebaseFilter filterTitle='Families' collection='families' />
       <FirebaseFilter filterTitle='Genuses' collection='genuses' />
+    </Fragment>;
+
+    const mobileFilters = <Fragment>
+      <FilterMobile filterName='Families'></FilterMobile>
+      <FilterMobile filterName='Genuses'></FilterMobile>
     </Fragment>;
 
     const dataContainer = <div className={classes.DataContainer}>
@@ -61,8 +67,8 @@ export default class PlantCatalog extends Component {
               show={this.state.showFilterSidedrawer}
               close={this.toggleFiltersSideDrawer}
               title='Filter by'
-            >{filters}</SideDrawer>
-            <Filters>{filters}</Filters>
+            >{mobileFilters}</SideDrawer>
+            <Filters>{desktopFilters}</Filters>
             {dataContainer}
           </main>
         </CatalogContext.Provider>
