@@ -6,6 +6,7 @@ import Backdrop from '../Backdrop/Backdrop';
 const modal = (props) => {
   return (
     <Fragment>
+      {/* TODO: Change modal animation to fade-in / fade-out */}
       <Backdrop show={props.show} clicked={props.closed} />
       <div
         className={classes.Modal}

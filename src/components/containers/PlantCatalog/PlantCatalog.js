@@ -3,6 +3,7 @@ import React, { Component, Fragment } from 'react';
 import CatalogContext from '../../../context/catalog-context';
 import FilterMobile from '../../Filters/FilterMobile/FilterMobile';
 import Filters from '../../Filters/Filters';
+import FilterMobileWrapper from '../../Filters/FilterMobile/FilterMobileWrapper/FilterMobileWrapper';
 import FirebaseFilter from '../../Filters/FirebaseFilter/FirebaseFilter';
 import Toolbar from '../../Toolbar/Toolbar';
 import SideDrawer from '../../UI/SideDrawer/SideDrawer';
@@ -46,10 +47,10 @@ export default class PlantCatalog extends Component {
       <FirebaseFilter filterTitle='Genuses' collection='genuses' />
     </Fragment>;
 
-    const mobileFilters = <Fragment>
+    const mobileFilters = <FilterMobileWrapper>
       <FilterMobile filterName='Families'></FilterMobile>
       <FilterMobile filterName='Genuses'></FilterMobile>
-    </Fragment>;
+    </FilterMobileWrapper>;
 
     const dataContainer = <div className={classes.DataContainer}>
       <div>SelectedFilters</div>

@@ -80,6 +80,7 @@ class FirebaseFilterSuggestion extends Component {
       <Fragment>
         <input type="text"
           onChange={(event) => this.inputChangeHandler(event.target.value)} />
+        {/* TODO: Style component to fit to a modal and a sidebar */}
         {/* TODO: Recommended results for query */}
         {/* TODO: Handle select a result event */}
       </Fragment>

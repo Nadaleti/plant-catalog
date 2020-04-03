@@ -1,0 +1,8 @@
+@import '../../../../styles/colors';
+
+.FilterMobileWrapper {
+  height: 70vh;
+  width: 100%;
+  border-top: 1px solid $background-grey;
+  overflow-y: auto;
+}
