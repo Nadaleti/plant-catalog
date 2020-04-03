@@ -2,6 +2,8 @@ import React, { Component, Fragment } from 'react'
 
 import firebase from '../../../../firebase';
 
+import classes from './FirebaseFilterSuggestion.module.scss';
+
 const NUMBER_OF_ITEMS = 20;
 const WAIT_INTERVAL = 1000;
 
@@ -10,7 +12,7 @@ class FirebaseFilterSuggestion extends Component {
 
   state = {
     loading: false,
-    loadedItems: [],
+    loadedItems: null,
     searchTerm: '',
     showSuggestionModal: false
   }
@@ -75,15 +77,40 @@ class FirebaseFilterSuggestion extends Component {
     return sentenceWords.join(' ');
   }
 
+  createSuggestedItems = () => {
+    if (this.state.loadedItems.length === 0) {
+      return <p>No items were found with the provided name...</p>;
+    } else {
+      return <ul className={classes.SuggestionList}>
+        {this.state.loadedItems.map((item) =>
+          <li
+            key={item.id}
+            className={classes.SuggestionItem}
+          >
+            {item.name}
+          </li>)}
+      </ul>;
+    }
+  }
+
   render() {
+    let suggestedItems = null;
+
+    if (this.state.loadedItems) {
+      suggestedItems = this.createSuggestedItems();
+    }
+
     return (
-      <Fragment>
-        <input type="text"
+      <div className={classes.FilterSuggestion}>
+        <input type="text" className={classes.SuggestionSearchbar}
           onChange={(event) => this.inputChangeHandler(event.target.value)} />
+        <div className={classes.SuggestionContainer}>
+          {suggestedItems}
+        </div>
         {/* TODO: Style component to fit to a modal and a sidebar */}
         {/* TODO: Recommended results for query */}
         {/* TODO: Handle select a result event */}
-      </Fragment>
+      </div>
     )
   }
 }

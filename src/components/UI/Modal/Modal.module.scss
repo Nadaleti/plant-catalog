@@ -1,20 +1,13 @@
-@import '../../../styles/media';
-
 .Modal {
   position: fixed;
   z-index: 500;
   background-color: white;
-  width: 80%;
+  width: 70%;
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 16px;
-  left: 10%;
+  left: 15%;
   top: 30%;
   box-sizing: border-box;
   transition: all 0.3s ease-out;
-
-  @include small-devices {
-    width: 500px;
-    left: calc(50% - 250px);
-  }
 }
