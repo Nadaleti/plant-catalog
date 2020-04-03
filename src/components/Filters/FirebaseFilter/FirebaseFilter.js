@@ -55,10 +55,13 @@ export default class FirebaseFilter extends Component {
 
     return (
       <Fragment>
-        <Modal show={this.state.showMoreFilterItems}
-          closed={this.closeMoreFilterItems}>
-          <FirebaseFilterSuggestion collection={this.props.collection} />
-        </Modal>
+        
+          
+          <Modal show={this.state.showMoreFilterItems}
+            closed={this.closeMoreFilterItems}>
+            <FirebaseFilterSuggestion collection={this.props.collection} />
+          </Modal>
+        
         <Filter label={this.props.filterTitle}>
           <ul className={classes.FixedItems}>
             {fixedItemsList}
