@@ -12,7 +12,7 @@ class FirebaseFilterSuggestion extends Component {
 
   state = {
     loading: false,
-    loadedItems: null,
+    loadedItems: [],
     searchTerm: '',
     showSuggestionModal: false
   }
@@ -79,7 +79,7 @@ class FirebaseFilterSuggestion extends Component {
 
   createSuggestedItems = () => {
     if (this.state.loadedItems.length === 0) {
-      return <p>No items were found with the provided name...</p>;
+      return <p className={classes.NoItemsFound}>No items found with the provided name...</p>;
     } else {
       return <ul className={classes.SuggestionList}>
         {this.state.loadedItems.map((item) =>
@@ -102,8 +102,12 @@ class FirebaseFilterSuggestion extends Component {
 
     return (
       <div className={classes.FilterSuggestion}>
-        <input type="text" className={classes.SuggestionSearchbar}
-          onChange={(event) => this.inputChangeHandler(event.target.value)} />
+        <div className={classes.SearchbarWrapper}>
+          <input type="text" className={classes.SuggestionSearchbar}
+            placeholder={this.props.searchbarPlaceholder}
+            onChange={(event) => this.inputChangeHandler(event.target.value)} />
+          <p className={classes.SearchbarTip}>Only 20 results are shown, type for more</p>
+        </div>
         <div className={classes.SuggestionContainer}>
           {suggestedItems}
         </div>

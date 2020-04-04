@@ -55,11 +55,14 @@ export default class FirebaseFilter extends Component {
 
     return (
       <Fragment>
-        
-          
-          <Modal show={this.state.showMoreFilterItems}
-            closed={this.closeMoreFilterItems}>
-            <FirebaseFilterSuggestion collection={this.props.collection} />
+          <Modal
+            show={this.state.showMoreFilterItems}
+            closed={this.closeMoreFilterItems}
+            modalTitle={this.props.filterTitle}
+            height='580px'  
+          >
+            <FirebaseFilterSuggestion collection={this.props.collection}
+              searchbarPlaceholder={this.props.searchbarPlaceholder} />
           </Modal>
         
         <Filter label={this.props.filterTitle}>

@@ -2,34 +2,58 @@
 @import '../../../../styles/media';
 
 .FilterSuggestion {
-  padding: 1rem 3rem;
+  padding: 0 2.5rem 1rem;
+  width: 450px;
 
-  >.SuggestionSearchbar {
+  >.SearchbarWrapper {
     width: 100%;
-    height: 3rem;
-    background-color: #ffffff;
-    box-sizing: border-box;
-    border: 1px solid #bbb;
-    border-radius: 6px;
-    font-size: 1rem;
-    padding: 0 10px;
-    color: $dark-grey;
-    outline: none;
+    margin-bottom: 2rem;
+
+    >.SuggestionSearchbar {
+      width: 100%;
+      height: 3rem;
+      background-color: #ffffff;
+      box-sizing: border-box;
+      border: 1px solid #bbb;
+      border-radius: 6px;
+      font-size: 1.1rem;
+      padding: 0 10px;
+      color: $dark-grey;
+      outline: none;
+    }
+  
+    >.SearchbarTip {
+      font-size: .8rem;
+      color: $faded-text;
+      margin-left: .5rem;
+      margin-top: .5rem;
+    }
   }
   
   >.SuggestionContainer {
     width: 100%;
-    padding: 1.5rem 0;
+
+    >.NoItemsFound {
+      color: $dark-grey;
+      font-size: 1rem;
+      font-style: italic;
+    }
   
     >.SuggestionList {
       width: 100%;
-      column-count: 3;
+      column-count: 2;
+      column-gap: 5rem;
     
       >.SuggestionItem {
         height: fit-content;
         color: $dark-grey;
-        margin-bottom: .8rem;
+        font-size: 1rem;
+        margin-bottom: 1.2rem;
         cursor: pointer;
+
+        &:hover {
+          color: $blue;
+        }
       }
     }
   }

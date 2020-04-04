@@ -10,6 +10,9 @@ import SideDrawer from '../../UI/SideDrawer/SideDrawer';
 
 import classes from './PlantCatalog.module.scss';
 
+const FAMILIES_PLACEHOLDER = 'Search for a family name...';
+const GENUSES_PLACEHOLDER = 'Search for a genus name...';
+
 export default class PlantCatalog extends Component {
   state = {
     filters: {},
@@ -37,14 +40,16 @@ export default class PlantCatalog extends Component {
   }
 
   render() {
-    let providedContextFunctions = {
+    let providedContext = {
       submit: this.searchPlants,
       updatePlantName: this.plantNameUpdateHandler
     }
 
     const desktopFilters = <Fragment>
-      <FirebaseFilter filterTitle='Families' collection='families' />
-      <FirebaseFilter filterTitle='Genuses' collection='genuses' />
+      <FirebaseFilter filterTitle='Families' collection='families'
+        searchbarPlaceholder={FAMILIES_PLACEHOLDER} />
+      <FirebaseFilter filterTitle='Genuses' collection='genuses'
+        searchbarPlaceholder={GENUSES_PLACEHOLDER} />
     </Fragment>;
 
     const mobileFilters = <FilterMobileWrapper>
@@ -61,7 +66,7 @@ export default class PlantCatalog extends Component {
 
     return (
       <div className={classes.PlantCatalog}>
-        <CatalogContext.Provider value={providedContextFunctions}>
+        <CatalogContext.Provider value={providedContext}>
           <Toolbar />
           <main className={classes.Content}>
             <SideDrawer
