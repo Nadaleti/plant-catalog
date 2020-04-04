@@ -5,7 +5,26 @@
   width: fit-content;
   border: 1px solid #ccc;
   border-radius: 8px;
-  padding: 16px;
+  padding: 1rem;
   box-sizing: border-box;
   transition: all .2s ease-in;
+
+  >.ModalHeader {
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 2rem;
+
+    >.CloseIcon {
+      color: #333;
+      font-size: 1.3rem;
+      cursor: pointer;
+    }
+
+    >.ModalTitle {
+      color: #333;
+      font-size: 1.5rem;
+    }
+  }
 }
