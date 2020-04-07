@@ -15,9 +15,14 @@ const sideDrawer = (props) => {
     sideDrawerClasses.push(classes.Closed);
   }
 
+  let backdrop = null;
+  if (props.backdrop) {
+    backdrop = <Backdrop show={props.show} clicked={props.close} />
+  }
+
   return (
     <Fragment>
-      <Backdrop show={props.show} clicked={props.close} />
+      {backdrop}
       <div className={sideDrawerClasses.join(' ')}>
         <header>
           <FontAwesomeIcon className={classes.ArrowIcon}

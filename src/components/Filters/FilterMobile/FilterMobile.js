@@ -1,18 +1,29 @@
-import React from 'react';
+import React, {useState, Fragment} from 'react';
 
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import SideDrawer from '../../UI/SideDrawer/SideDrawer';
 
 import classes from './FilterMobile.module.scss';
 
-const filterMobile = (props) => {
+const FilterMobile = (props) => {
+  const [showSelectedFilter, setShowSelectedFilterState] = useState(false);
+
+  const toggleSelectedFilter = () => {
+    setShowSelectedFilterState(!showSelectedFilter);
+  };
+
   return (
-    <div className={classes.FilterMobile}>
-      {props.filterName}
-      <FontAwesomeIcon className={classes.RightArrow} icon={faChevronRight} />
-      {/* TODO: open new area to filter on sidebar */}
-    </div>
+    <Fragment>
+      <SideDrawer show={showSelectedFilter} title={props.filterName} close={toggleSelectedFilter}>
+        {props.children}
+      </SideDrawer>
+      <div className={classes.FilterMobile} onClick={toggleSelectedFilter}>
+        {props.filterName}
+        <FontAwesomeIcon className={classes.RightArrow} icon={faChevronRight} />
+      </div>
+    </Fragment>
   )
 }
 
-export default filterMobile;
+export default FilterMobile;

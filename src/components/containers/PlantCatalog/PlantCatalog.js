@@ -9,6 +9,7 @@ import Toolbar from '../../Toolbar/Toolbar';
 import SideDrawer from '../../UI/SideDrawer/SideDrawer';
 
 import classes from './PlantCatalog.module.scss';
+import FirebaseFilterSuggestion from '../../Filters/FirebaseFilter/FirebaseFilterSuggestion/FirebaseFilterSuggestion';
 
 const FAMILIES_PLACEHOLDER = 'Search for a family name...';
 const GENUSES_PLACEHOLDER = 'Search for a genus name...';
@@ -53,8 +54,12 @@ export default class PlantCatalog extends Component {
     </Fragment>;
 
     const mobileFilters = <FilterMobileWrapper>
-      <FilterMobile filterName='Families'></FilterMobile>
-      <FilterMobile filterName='Genuses'></FilterMobile>
+      <FilterMobile filterName='Families'>
+        <FirebaseFilterSuggestion collection='families' searchbarPlaceholder={FAMILIES_PLACEHOLDER} />
+      </FilterMobile>
+      <FilterMobile filterName='Genuses'>
+        <FirebaseFilterSuggestion collection='genuses' searchbarPlaceholder={GENUSES_PLACEHOLDER} />
+      </FilterMobile>
     </FilterMobileWrapper>;
 
     const dataContainer = <div className={classes.DataContainer}>
@@ -73,6 +78,7 @@ export default class PlantCatalog extends Component {
               show={this.state.showFilterSidedrawer}
               close={this.toggleFiltersSideDrawer}
               title='Filter by'
+              backdrop
             >{mobileFilters}</SideDrawer>
             <Filters>{desktopFilters}</Filters>
             {dataContainer}

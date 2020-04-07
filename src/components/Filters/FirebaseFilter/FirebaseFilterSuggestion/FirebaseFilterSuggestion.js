@@ -1,11 +1,11 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 
 import firebase from '../../../../firebase';
 
 import classes from './FirebaseFilterSuggestion.module.scss';
 
 const NUMBER_OF_ITEMS = 20;
-const WAIT_INTERVAL = 1000;
+const WAIT_INTERVAL = 500;
 
 class FirebaseFilterSuggestion extends Component {
   collectionRef = firebase.firestore().collection(this.props.collection);
@@ -106,13 +106,11 @@ class FirebaseFilterSuggestion extends Component {
           <input type="text" className={classes.SuggestionSearchbar}
             placeholder={this.props.searchbarPlaceholder}
             onChange={(event) => this.inputChangeHandler(event.target.value)} />
-          <p className={classes.SearchbarTip}>Only 20 results are shown, type for more</p>
+          <p className={classes.SearchbarTip}>Only the first 20 results are shown, type for more</p>
         </div>
         <div className={classes.SuggestionContainer}>
           {suggestedItems}
         </div>
-        {/* TODO: Style component to fit to a modal and a sidebar */}
-        {/* TODO: Recommended results for query */}
         {/* TODO: Handle select a result event */}
       </div>
     )
