@@ -1,9 +1,6 @@
 import React, { Component, Fragment } from 'react';
-import PropTypes from 'prop-types';
 
 import Filter from '../Filter/Filter';
-import firebase from '../../../firebase';
-import FirebaseFilterSuggestion from './FirebaseFilterSuggestion/FirebaseFilterSuggestion';
 import Modal from '../../UI/Modal/Modal';
 
 import classes from './FirebaseFilter.module.scss';
@@ -11,7 +8,6 @@ import classes from './FirebaseFilter.module.scss';
 const NUMBER_OF_ITEMS = 10;
 
 export default class FirebaseFilter extends Component {
-  collectionRef = firebase.firestore().collection(this.props.collection);
   fixedItems = null;
 
   state = {
@@ -24,7 +20,7 @@ export default class FirebaseFilter extends Component {
   }
 
   loadItems = () => {
-    this.collectionRef
+    this.props.collection
       .limit(NUMBER_OF_ITEMS)
       .get()
       .then((response) => {
@@ -61,8 +57,7 @@ export default class FirebaseFilter extends Component {
             modalTitle={this.props.filterTitle}
             height='580px'  
           >
-            <FirebaseFilterSuggestion collection={this.props.collection}
-              searchbarPlaceholder={this.props.searchbarPlaceholder} />
+            {this.props.suggestionFilter}
           </Modal>
         
         <Filter label={this.props.filterTitle}>
@@ -73,8 +68,4 @@ export default class FirebaseFilter extends Component {
       </Fragment>
     )
   }
-}
-
-FirebaseFilter.propTypes = {
-  collection: PropTypes.string
 }
