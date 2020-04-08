@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 
+import CatalogContext from '../../../context/catalog-context';
 import Filter from '../Filter/Filter';
 import Modal from '../../UI/Modal/Modal';
 
@@ -10,6 +11,8 @@ const NUMBER_OF_ITEMS = 10;
 export default class FirebaseFilter extends Component {
   fixedItems = null;
 
+  static contextType = CatalogContext;
+
   state = {
     loading: false,
     showMoreFilterItems: false
@@ -17,6 +20,12 @@ export default class FirebaseFilter extends Component {
 
   componentDidMount() {
     this.loadItems();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.collection !== prevProps.collection) {
+      this.loadItems();
+    }
   }
 
   loadItems = () => {
@@ -42,7 +51,8 @@ export default class FirebaseFilter extends Component {
 
   render() {
     const fixedItemsList = this.fixedItems ?
-      this.fixedItems.map((item) => <li key={item.id}>{item.name}</li>) : null;
+      this.fixedItems.map((item) => <li key={item.id}
+        onClick={() => this.context.selectFilter(this.props.filterName, item)}>{item.name}</li>) : null;
     
     if (fixedItemsList) {
       fixedItemsList.push(

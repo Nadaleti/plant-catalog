@@ -15,7 +15,7 @@ import classes from './PlantCatalog.module.scss';
 
 export default class PlantCatalog extends Component {
   state = {
-    filters: {},
+    selectedFilters: {},
     plantName: null,
     plants: null,
     showFilterSidedrawer: false
@@ -27,6 +27,13 @@ export default class PlantCatalog extends Component {
 
   plantNameUpdateHandler = (plantName) => {
     this.setState({ plantName: plantName });
+  }
+
+  filterClickHandler = (filterName, selectedFilter) => {
+    const selectedFilters = {...this.state.selectedFilters};
+
+    selectedFilters[filterName] = selectedFilter;
+    this.setState({selectedFilters: selectedFilters});
   }
 
   searchPlants = () => {
@@ -41,13 +48,14 @@ export default class PlantCatalog extends Component {
 
   render() {
     let providedContext = {
+      selectFilter: this.filterClickHandler,
       submit: this.searchPlants,
       updatePlantName: this.plantNameUpdateHandler
     }
 
     const desktopFilters = <Fragment>
       <FamiliesFilter />
-      <GenusesFilter />
+      <GenusesFilter family={this.state.selectedFilters.family} />
     </Fragment>;
 
     const mobileFilters = <FilterMobileWrapper>
@@ -55,7 +63,7 @@ export default class PlantCatalog extends Component {
         <FamiliesFilterSuggestion />
       </FilterMobile>
       <FilterMobile filterName='Genuses'>
-        <GenusesFilterSuggestion />
+        <GenusesFilterSuggestion family={this.state.selectedFilters.family} />
       </FilterMobile>
     </FilterMobileWrapper>;
 

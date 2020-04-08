@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 
+import CatalogContext from '../../../../context/catalog-context';
+
 import classes from './FirebaseFilterSuggestion.module.scss';
 
 const NUMBER_OF_ITEMS = 20;
@@ -13,9 +15,17 @@ class FirebaseFilterSuggestion extends Component {
     showSuggestionModal: false
   }
 
+  static contextType = CatalogContext;
+
   componentDidMount() {
     this.loadItems();
-  } 
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.collection !== prevProps.collection) {
+      this.loadItems();
+    }
+  }
 
   getFirebaseQuery = () => {
     let query = this.props.collection
@@ -82,6 +92,7 @@ class FirebaseFilterSuggestion extends Component {
           <li
             key={item.id}
             className={classes.SuggestionItem}
+            onClick={() => this.context.selectFilter(this.props.filterName, item)}
           >
             {item.name}
           </li>)}

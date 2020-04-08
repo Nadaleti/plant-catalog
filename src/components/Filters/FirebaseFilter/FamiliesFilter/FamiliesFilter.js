@@ -5,12 +5,13 @@ import FirebaseFilter from '../FirebaseFilter';
 import FamiliesFilterSuggestion from './FamiliesFilterSuggestion';
 
 const collectionRef = firebase.firestore().collection('families');
+const FILTER_NAME = 'family';
 
 const familiesFilter = () => {
   let suggestionFilter = <FamiliesFilterSuggestion />
 
   return (
-    <FirebaseFilter collection={collectionRef}
+    <FirebaseFilter collection={collectionRef} filterName={FILTER_NAME}
       filterTitle='Families' suggestionFilter={suggestionFilter} />
   )
 }
