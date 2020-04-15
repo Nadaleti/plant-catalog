@@ -8,13 +8,15 @@ const collectionRef = firebase.firestore().collection('families');
 const FILTER_NAME = 'family';
 const DISPLAY_PROPERTY = 'name';
 
-const familiesFilter = () => {
+const familiesFilter = (props) => {
+  const isAlreadySelected = !!props.selectedFilters.find((filter) => filter.filterName === FILTER_NAME);
   let suggestionFilter = <FamiliesFilterSuggestion />
 
   return (
-    <FirebaseFilter collection={collectionRef}
-      displayProperty={DISPLAY_PROPERTY} filterName={FILTER_NAME}
-      filterTitle='Families' suggestionFilter={suggestionFilter} />
+    !isAlreadySelected ?
+      <FirebaseFilter collection={collectionRef}
+        displayProperty={DISPLAY_PROPERTY} filterName={FILTER_NAME}
+        filterTitle='Families' suggestionFilter={suggestionFilter} /> : null
   )
 }
 

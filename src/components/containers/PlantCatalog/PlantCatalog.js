@@ -23,6 +23,8 @@ export default class PlantCatalog extends Component {
   filterClickHandler = (displayValue, filterName, selectedFilter) => {
     let selectedFilters = [...this.state.selectedFilters];
 
+    this.removeFilter(filterName, selectedFilters);
+
     selectedFilters.push({
       displayValue: displayValue,
       filterName: filterName,
@@ -32,17 +34,21 @@ export default class PlantCatalog extends Component {
     this.setState({selectedFilters: selectedFilters});
   }
 
-  filterRemoveHandler = (filterName) => {
+  filterRemoveClickHandler = (filterName) => {
     const selectedFilters = [...this.state.selectedFilters];
 
-    const itemToRemoveIdx = selectedFilters
+    this.removeFilter(filterName, selectedFilters);
+
+    this.setState({selectedFilters: selectedFilters})
+  }
+
+  removeFilter = (filterName, filterList) => {
+    const itemToRemoveIdx = filterList
       .findIndex((filter) => filter.filterName === filterName);
 
     if (itemToRemoveIdx >= 0) {
-      selectedFilters.splice(itemToRemoveIdx, 1);
+      filterList.splice(itemToRemoveIdx, 1);
     }
-
-    this.setState({selectedFilters: selectedFilters})
   }
 
   plantNameUpdateHandler = (plantName) => {
@@ -61,7 +67,7 @@ export default class PlantCatalog extends Component {
 
   render() {
     const providedContext = {
-      removeFilter: this.filterRemoveHandler,
+      removeFilter: this.filterRemoveClickHandler,
       selectFilter: this.filterClickHandler,
       submit: this.searchPlants,
       updatePlantName: this.plantNameUpdateHandler

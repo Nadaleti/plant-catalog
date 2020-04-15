@@ -9,15 +9,17 @@ const FILTER_NAME = 'genus';
 const DISPLAY_PROPERTY = 'name';
 
 const genusesFilter = (props) => {
-  let suggestionFilter = <GenusesFilterSuggestion family={props.family} />
-  let firebaseQuery = !!props.family ?
-    collectionRef.where('family_id', '==', props.family.value.id) :
+  const family = props.selectedFilters.find((filter) => filter.filterName === 'family');
+
+  let suggestionFilter = <GenusesFilterSuggestion family={family} />
+  let firebaseQuery = !!family ?
+    collectionRef.where('family_id', '==', family.value.id) :
     collectionRef;
 
   return (
-    <FirebaseFilter collection={firebaseQuery}
-      displayProperty={DISPLAY_PROPERTY} filterName={FILTER_NAME}
-      filterTitle='Genuses' suggestionFilter={suggestionFilter} />
+      <FirebaseFilter collection={firebaseQuery}
+        displayProperty={DISPLAY_PROPERTY} filterName={FILTER_NAME}
+        filterTitle='Genuses' suggestionFilter={suggestionFilter} />
   )
 }
 

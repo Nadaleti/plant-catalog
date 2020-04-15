@@ -7,8 +7,8 @@ import GenusesFilter from '../../../../Filters/FirebaseFilter/GenusesFilter/Genu
 const plantCatalogDesktopFilters = (props) => {
   return (
     <Filters>
-      <FamiliesFilter />
-      <GenusesFilter family={props.selectedFilters.find((filter) => filter.filterName === 'family')} />
+      <FamiliesFilter selectedFilters={props.selectedFilters} />
+      <GenusesFilter selectedFilters={props.selectedFilters} />
     </Filters>
   )
 }
