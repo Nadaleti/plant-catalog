@@ -18,7 +18,11 @@
       display: flex;
       flex-flow: column;
       align-items: center;
-      width: calc(100% - 200px);
+      width: 100%;
+
+      @include small-devices {
+        width: calc(100% - 200px);
+      }
     }
 
     .FiltersButton {

@@ -1,15 +1,9 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 
 import CatalogContext from '../../../context/catalog-context';
-import FilterMobile from '../../Filters/FilterMobile/FilterMobile';
-import Filters from '../../Filters/Filters';
-import FilterMobileWrapper from '../../Filters/FilterMobile/FilterMobileWrapper/FilterMobileWrapper';
-import FamiliesFilter from '../../Filters/FirebaseFilter/FamiliesFilter/FamiliesFilter';
-import FamiliesFilterSuggestion from '../../Filters/FirebaseFilter/FamiliesFilter/FamiliesFilterSuggestion';
-import GenusesFilter from '../../Filters/FirebaseFilter/GenusesFilter/GenusesFilter';
-import GenusesFilterSuggestion from '../../Filters/FirebaseFilter/GenusesFilter/GenusesFilterSuggestion';
+import DesktopFilters from './PlantCatalogFilters/PlantCatalogDesktopFilters/PlantCatalogDesktopFilters';
+import MobileFilters from './PlantCatalogFilters/PlantCatalogMobileFilters/PlantCatalogMobileFilters';
 import SelectedFilters from '../../Filters/SelectedFilters/SelectedFilters';
-import SideDrawer from '../../UI/SideDrawer/SideDrawer';
 import Toolbar from '../../Toolbar/Toolbar';
 
 import classes from './PlantCatalog.module.scss';
@@ -19,7 +13,7 @@ export default class PlantCatalog extends Component {
     selectedFilters: [],
     plantName: null,
     plants: null,
-    showFilterSidedrawer: false
+    shouldShowMobileFilters: false
   };
 
   shouldComponentUpdate(_, nextState) {
@@ -59,9 +53,9 @@ export default class PlantCatalog extends Component {
     console.log(this.state);
   }
 
-  toggleFiltersSideDrawer = () => {
+  toggleMobileFilters = () => {
     this.setState((prevState) => {
-      return {showFilterSidedrawer: !prevState.showFilterSidedrawer}
+      return {shouldShowMobileFilters: !prevState.shouldShowMobileFilters}
     });
   }
 
@@ -73,24 +67,10 @@ export default class PlantCatalog extends Component {
       updatePlantName: this.plantNameUpdateHandler
     }
 
-    const desktopFilters = <Fragment>
-      <FamiliesFilter />
-      <GenusesFilter family={this.state.selectedFilters.find((filter) => filter.filterName === 'family')} />
-    </Fragment>;
-
-    const mobileFilters = <FilterMobileWrapper>
-      <FilterMobile filterName='Families'>
-        <FamiliesFilterSuggestion />
-      </FilterMobile>
-      <FilterMobile filterName='Genuses'>
-        <GenusesFilterSuggestion family={this.state.selectedFilters.find((filter) => filter.filterName === 'family')} />
-      </FilterMobile>
-    </FilterMobileWrapper>;
-
     const dataContainer = <div className={classes.DataContainer}>
       <SelectedFilters selectedFilters={this.state.selectedFilters} />
       <button className={classes.FiltersButton}
-        onClick={this.toggleFiltersSideDrawer}>Filters</button>
+        onClick={this.toggleMobileFilters}>Filters</button>
       <div>PlantsCardList</div>
     </div>;
 
@@ -99,13 +79,11 @@ export default class PlantCatalog extends Component {
         <CatalogContext.Provider value={providedContext}>
           <Toolbar />
           <main className={classes.Content}>
-            <SideDrawer
-              show={this.state.showFilterSidedrawer}
-              close={this.toggleFiltersSideDrawer}
-              title='Filter by'
-              backdrop
-            >{mobileFilters}</SideDrawer>
-            <Filters>{desktopFilters}</Filters>
+            <MobileFilters
+              selectedFilters={this.state.selectedFilters}
+              show={this.state.shouldShowMobileFilters}
+              toggleFilters={this.toggleMobileFilters} />
+            <DesktopFilters selectedFilters={this.state.selectedFilters} />
             {dataContainer}
           </main>
         </CatalogContext.Provider>

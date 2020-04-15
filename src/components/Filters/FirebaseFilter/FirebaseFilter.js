@@ -61,7 +61,7 @@ export default class FirebaseFilter extends Component {
       this.fixedItems.map((item) => <li key={item.id}
         onClick={() => this.context.selectFilter(item[this.props.displayProperty], this.props.filterName, item)}>{item.name}</li>) : null;
     
-    if (this.fixedItems && this.fixedItems.length == NUMBER_OF_ITEMS && fixedItemsList) {
+    if (this.fixedItems && this.fixedItems.length === NUMBER_OF_ITEMS && fixedItemsList) {
       fixedItemsList.push(
         <li key='see-all' className={classes.SeeAllItem} onClick={this.seeAllClickHandler}>See all</li>);
     }
