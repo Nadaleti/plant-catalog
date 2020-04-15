@@ -50,17 +50,25 @@ export default class FirebaseFilter extends Component {
   }
 
   render() {
+    const providedContext = {
+      selectFilter: (displayValue, filterName, selectedFilter) => {
+        this.context.selectFilter(displayValue, filterName, selectedFilter);
+        this.closeMoreFilterItems();
+      }
+    };
+
     const fixedItemsList = this.fixedItems ?
       this.fixedItems.map((item) => <li key={item.id}
-        onClick={() => this.context.selectFilter(this.props.filterName, item)}>{item.name}</li>) : null;
+        onClick={() => this.context.selectFilter(item[this.props.displayProperty], this.props.filterName, item)}>{item.name}</li>) : null;
     
-    if (fixedItemsList) {
+    if (this.fixedItems && this.fixedItems.length == NUMBER_OF_ITEMS && fixedItemsList) {
       fixedItemsList.push(
         <li key='see-all' className={classes.SeeAllItem} onClick={this.seeAllClickHandler}>See all</li>);
     }
 
     return (
       <Fragment>
+        <CatalogContext.Provider value={providedContext}>
           <Modal
             show={this.state.showMoreFilterItems}
             closed={this.closeMoreFilterItems}
@@ -69,6 +77,7 @@ export default class FirebaseFilter extends Component {
           >
             {this.props.suggestionFilter}
           </Modal>
+        </CatalogContext.Provider>
         
         <Filter label={this.props.filterTitle}>
           <ul className={classes.FixedItems}>

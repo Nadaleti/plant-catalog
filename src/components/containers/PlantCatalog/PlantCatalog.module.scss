@@ -8,16 +8,17 @@
     display: flex;
     flex-flow: row;
     max-width: 1200px;
-    max-height: 90vh;
+    height: calc(100% - 4rem);
     margin: 0 auto;
     overflow: auto;
-    padding-top: 40px;
+    padding: 40px 0;
+    box-sizing: border-box;
 
     >.DataContainer {
       display: flex;
       flex-flow: column;
       align-items: center;
-      width: 100%;
+      width: calc(100% - 200px);
     }
 
     .FiltersButton {

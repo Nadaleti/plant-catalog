@@ -92,7 +92,7 @@ class FirebaseFilterSuggestion extends Component {
           <li
             key={item.id}
             className={classes.SuggestionItem}
-            onClick={() => this.context.selectFilter(this.props.filterName, item)}
+            onClick={() => this.context.selectFilter(item[this.props.displayProperty], this.props.filterName, item)}
           >
             {item.name}
           </li>)}
@@ -118,7 +118,6 @@ class FirebaseFilterSuggestion extends Component {
         <div className={classes.SuggestionContainer}>
           {suggestedItems}
         </div>
-        {/* TODO: Handle select a result event */}
       </div>
     )
   }

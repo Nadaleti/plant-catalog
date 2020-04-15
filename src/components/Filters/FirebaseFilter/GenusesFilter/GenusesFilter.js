@@ -6,15 +6,17 @@ import GenusesFilterSuggestion from './GenusesFilterSuggestion';
 
 const collectionRef = firebase.firestore().collection('genuses');
 const FILTER_NAME = 'genus';
+const DISPLAY_PROPERTY = 'name';
 
 const genusesFilter = (props) => {
   let suggestionFilter = <GenusesFilterSuggestion family={props.family} />
   let firebaseQuery = !!props.family ?
-    collectionRef.where('family_id', '==', props.family.id) :
+    collectionRef.where('family_id', '==', props.family.value.id) :
     collectionRef;
 
   return (
-    <FirebaseFilter collection={firebaseQuery} filterName={FILTER_NAME}
+    <FirebaseFilter collection={firebaseQuery}
+      displayProperty={DISPLAY_PROPERTY} filterName={FILTER_NAME}
       filterTitle='Genuses' suggestionFilter={suggestionFilter} />
   )
 }
