@@ -1,0 +1,16 @@
+.SelectedFiltersContainer {
+  display: flex;
+  flex-flow: row;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  padding: .5rem;
+  background-color: #bbbbbb;
+  border-radius: 6px;
+  box-sizing: border-box;
+
+  div:not(:last-child) {
+    margin-right: .5rem;
+  }
+}

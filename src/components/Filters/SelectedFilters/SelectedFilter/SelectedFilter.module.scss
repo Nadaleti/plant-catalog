@@ -1,0 +1,33 @@
+@import '../../../../styles/colors';
+
+.SelectedFilter {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  height: 100%;
+  padding: .5rem;
+  box-sizing: border-box;
+  background-color: #999999;
+  border-radius: 6px;
+  cursor: pointer;
+
+  .Filter {
+    display: flex;
+    flex-flow: column;
+    align-items: flex-start;
+
+    >.FilterName, .FilterValue {
+      font-size: .8rem;
+    }
+  
+    >.FilterName {
+      font-weight: bold;
+      margin-bottom: .3rem;
+    }
+  }
+
+  .RemoveIcon {
+    font-size: .75rem;
+    color: #333;
+  }
+}
