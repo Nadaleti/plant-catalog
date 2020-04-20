@@ -92,12 +92,17 @@ class FirebaseFilterSuggestion extends Component {
           <li
             key={item.id}
             className={classes.SuggestionItem}
-            onClick={() => this.context.selectFilter(item[this.props.displayProperty], this.props.filterName, item)}
+            onClick={() => this.selectFilter(item[this.props.displayProperty], this.props.filterName, item)}
           >
             {item.name}
           </li>)}
       </ul>;
     }
+  }
+
+  selectFilter = (displayValue, filterName, item) => {
+    this.setState({searchTerm: ''}, () => this.loadItems());
+    this.context.selectFilter(displayValue, filterName, item);
   }
 
   render() {
@@ -112,7 +117,8 @@ class FirebaseFilterSuggestion extends Component {
         <div className={classes.SearchbarWrapper}>
           <input type="text" className={classes.SuggestionSearchbar}
             placeholder={this.props.searchbarPlaceholder}
-            onChange={(event) => this.inputChangeHandler(event.target.value)} />
+            onChange={(event) => this.inputChangeHandler(event.target.value)}
+            value={this.state.searchTerm} />
           <p className={classes.SearchbarTip}>Only the first {NUMBER_OF_ITEMS} results are shown, type for more</p>
         </div>
         <div className={classes.SuggestionContainer}>

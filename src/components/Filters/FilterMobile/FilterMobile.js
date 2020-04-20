@@ -24,12 +24,13 @@ const FilterMobile = (props) => {
   return (
     <Fragment>
       <CatalogContext.Provider value={{selectFilter: selectFilter}}>
-        <SideDrawer show={showSelectedFilter} title={props.filterName} close={toggleSelectedFilter}>
+        <SideDrawer show={showSelectedFilter} title={props.filterTitle} close={toggleSelectedFilter}>
           {props.children}
         </SideDrawer>
       </CatalogContext.Provider>
       <div className={classes.FilterMobile} onClick={toggleSelectedFilter}>
-        {props.filterName}
+        {props.filterTitle}
+        <span className={classes.SelectedFilter}>{props.selectedFilterValue}</span>
         <FontAwesomeIcon className={classes.RightArrow} icon={faChevronRight} />
       </div>
     </Fragment>
