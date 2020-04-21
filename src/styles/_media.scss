@@ -14,7 +14,7 @@
 
 /* Medium devices (landscape tablets, 768px and up) */
 @mixin medium-devices() {
-@media only screen and (min-width: 768px) {
+  @media only screen and (min-width: 768px) {
     @content
   }
 };
@@ -32,3 +32,9 @@
     @content
   }
 };
+
+@mixin below-extra-large-devices() {
+  @media only screen and (max-width: 1230px) {
+    @content
+  }
+}

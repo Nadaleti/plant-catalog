@@ -1,0 +1,15 @@
+@import '../../styles/media';
+
+.Filters {
+  width: 200px;
+  font-size: 1.1rem;
+  text-align: left;
+  
+  h3 {
+    margin-bottom: 1.5rem;
+  }
+
+  @include extra-small-devices {
+    display: none;
+  }
+}
