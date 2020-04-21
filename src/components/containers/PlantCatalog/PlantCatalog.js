@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
 import CatalogContext from '../../../context/catalog-context';
-import DesktopFilters from './PlantCatalogFilters/PlantCatalogDesktopFilters/PlantCatalogDesktopFilters';
-import MobileFilters from './PlantCatalogFilters/PlantCatalogMobileFilters/PlantCatalogMobileFilters';
+import DesktopFilters from './PlantCatalogFilters/PlantCatalogDesktopFilters';
+import MobileFilters from './PlantCatalogFilters/PlantCatalogMobileFilters';
 import SelectedFilters from '../../Filters/SelectedFilters/SelectedFilters';
 import Toolbar from '../../Toolbar/Toolbar';
 

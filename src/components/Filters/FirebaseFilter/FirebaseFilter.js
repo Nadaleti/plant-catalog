@@ -9,14 +9,13 @@ import classes from './FirebaseFilter.module.scss';
 const NUMBER_OF_ITEMS = 10;
 
 export default class FirebaseFilter extends Component {
-  fixedItems = null;
-
-  static contextType = CatalogContext;
-
   state = {
+    fixedItems: null,
     loading: false,
     showMoreFilterItems: false
   }
+
+  static contextType = CatalogContext;
 
   componentDidMount() {
     this.loadItems();
@@ -28,14 +27,27 @@ export default class FirebaseFilter extends Component {
     }
   }
 
+  getFixedItemsList = () => {
+    const fixedItemsList = this.state.fixedItems.map((item) => <li key={item.id}
+      onClick={() => this.context.selectFilter(item[this.props.displayProperty], this.props.filterName, item)}>{item.name}</li>);
+
+    if (this.state.fixedItems && this.state.fixedItems.length === NUMBER_OF_ITEMS && fixedItemsList) {
+      fixedItemsList.push(
+        <li key='see-all' className={classes.SeeAllItem} onClick={this.seeAllClickHandler}>See all</li>);
+    }
+
+    return <ul className={classes.FixedItems}>
+      {fixedItemsList}
+    </ul>;
+  }
+
   loadItems = () => {
     this.props.collection
       .limit(NUMBER_OF_ITEMS)
       .get()
       .then((response) => {
-        this.fixedItems = response.docs.map((doc) => doc.data());
-
         this.setState({
+          fixedItems: response.docs.map((doc) => doc.data()),
           loading: false
         });
       });
@@ -57,33 +69,23 @@ export default class FirebaseFilter extends Component {
       }
     };
 
-    const fixedItemsList = this.fixedItems ?
-      this.fixedItems.map((item) => <li key={item.id}
-        onClick={() => this.context.selectFilter(item[this.props.displayProperty], this.props.filterName, item)}>{item.name}</li>) : null;
-    
-    if (this.fixedItems && this.fixedItems.length === NUMBER_OF_ITEMS && fixedItemsList) {
-      fixedItemsList.push(
-        <li key='see-all' className={classes.SeeAllItem} onClick={this.seeAllClickHandler}>See all</li>);
-    }
+    const fixedItemsList = this.state.fixedItems ? this.getFixedItemsList() : null;
+    const moreFiltersModal = <Modal
+      show={this.state.showMoreFilterItems}
+      closed={this.closeMoreFilterItems}
+      modalTitle={this.props.filterTitle}
+      height='580px'>
+      {this.props.suggestionFilter}
+    </Modal>
 
     return (
       <Fragment>
-        <CatalogContext.Provider value={providedContext}>
-          <Modal
-            show={this.state.showMoreFilterItems}
-            closed={this.closeMoreFilterItems}
-            modalTitle={this.props.filterTitle}
-            height='580px'  
-          >
-            {this.props.suggestionFilter}
-          </Modal>
-        </CatalogContext.Provider>
-        
-        <Filter label={this.props.filterTitle}>
-          <ul className={classes.FixedItems}>
-            {fixedItemsList}
-          </ul>
+        <Filter title={this.props.filterTitle}>
+          {fixedItemsList}
         </Filter>
+        <CatalogContext.Provider value={providedContext}>
+          {moreFiltersModal}
+        </CatalogContext.Provider>
       </Fragment>
     )
   }

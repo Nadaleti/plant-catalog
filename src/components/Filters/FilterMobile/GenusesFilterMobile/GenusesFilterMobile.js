@@ -1,19 +1,22 @@
 import React from 'react';
 
+import FilterMobile from '../FilterMobile';
+import FilterGenusComponent from '../../../base-components/FilterGenusComponent';
 import GenusesFilterSuggestion from '../../FirebaseFilter/GenusesFilter/GenusesFilterSuggestion';
-import FilterMobile from '../FilterMobile'; 
-
-const FILTER_NAME = 'genus';
 
 const genusesFilterMobile = (props) => {
-  const selectedFilter = props.selectedFilters
-    .find((filter) => filter.filterName === FILTER_NAME);
-
   return (
-    <FilterMobile filterTitle='Genuses'
-      selectedFilterValue={!!selectedFilter ? selectedFilter.displayValue : null}>
-      <GenusesFilterSuggestion family={props.selectedFilters.find((filter) => filter.filterName === 'family')} />
-    </FilterMobile>
+    <FilterGenusComponent>
+      {(filterName) => {
+        const selectedFilter = props.selectedFilters
+          .find((filter) => filter.filterName === filterName);
+
+        return <FilterMobile filterTitle='Genuses'
+          selectedFilterValue={!!selectedFilter ? selectedFilter.displayValue : null}>
+          <GenusesFilterSuggestion family={props.selectedFilters.find((filter) => filter.filterName === 'family')} />
+        </FilterMobile>
+      }}
+    </FilterGenusComponent>
   )
 }
 

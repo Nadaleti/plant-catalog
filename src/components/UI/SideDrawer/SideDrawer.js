@@ -1,8 +1,9 @@
 import React, { Fragment } from 'react';
 
-import Backdrop from '../Backdrop/Backdrop';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import Backdrop from '../Backdrop/Backdrop';
 
 import classes from './SideDrawer.module.scss';
 

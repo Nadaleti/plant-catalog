@@ -1,22 +1,26 @@
 import React from 'react';
 
-import firebase from '../../../../firebase';
-import FirebaseFilter from '../FirebaseFilter';
 import FamiliesFilterSuggestion from './FamiliesFilterSuggestion';
+import FirebaseFilter from '../FirebaseFilter';
+import FirebaseFilterFamilyComponent from '../../../base-components/FirebaseFilterFamilyComponent';
 
-const collectionRef = firebase.firestore().collection('families');
-const FILTER_NAME = 'family';
 const DISPLAY_PROPERTY = 'name';
 
 const familiesFilter = (props) => {
-  const isAlreadySelected = !!props.selectedFilters.find((filter) => filter.filterName === FILTER_NAME);
   let suggestionFilter = <FamiliesFilterSuggestion />
 
+  let getFirebaseFilter = (collectionRef, filterName) => <FirebaseFilter collection={collectionRef}
+        displayProperty={DISPLAY_PROPERTY} filterName={filterName}
+        filterTitle='Families' suggestionFilter={suggestionFilter} />;
+
   return (
-    !isAlreadySelected ?
-      <FirebaseFilter collection={collectionRef}
-        displayProperty={DISPLAY_PROPERTY} filterName={FILTER_NAME}
-        filterTitle='Families' suggestionFilter={suggestionFilter} /> : null
+    <FirebaseFilterFamilyComponent>
+      {(collectionRef, filterName) => {
+        const isAlreadySelected = !!props.selectedFilters.find((filter) => filter.filterName === filterName);
+
+        return !isAlreadySelected ? getFirebaseFilter(collectionRef, filterName) : null
+      }}
+    </FirebaseFilterFamilyComponent>
   )
 }
 
