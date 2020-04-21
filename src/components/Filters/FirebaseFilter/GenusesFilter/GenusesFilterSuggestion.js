@@ -7,7 +7,7 @@ const DISPLAY_PROPERTY = 'name';
 
 const genusesFilter = (props) => {
   return (
-    <FirebaseFilterGenusComponent>
+    <FirebaseFilterGenusComponent selectedFamily={props.family}>
       {(firebaseQuery, filterName) =>
         <FirebaseFilterSuggestion collection={firebaseQuery}
           displayProperty={DISPLAY_PROPERTY} filterName={filterName}

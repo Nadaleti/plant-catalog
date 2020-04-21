@@ -9,10 +9,9 @@ const WAIT_INTERVAL = 500;
 
 class FirebaseFilterSuggestion extends Component {
   state = {
-    loading: false,
     loadedItems: [],
-    searchTerm: '',
-    showSuggestionModal: false
+    loading: false,
+    searchTerm: ''
   }
 
   static contextType = CatalogContext;
@@ -28,12 +27,14 @@ class FirebaseFilterSuggestion extends Component {
   }
 
   getFirebaseQuery = () => {
-    let query = this.props.collection
-      .where('name', '>=', this.toTitleCase(this.state.searchTerm));
+    let query = this.props.collection;
     
     if (this.state.searchTerm !== '') {
       const topLimitString = this.getTopLimitString(this.state.searchTerm);
-      query = query.where('name', '<', this.toTitleCase(topLimitString));
+
+      query = query
+        .where('name', '>=', this.toTitleCase(this.state.searchTerm))
+        .where('name', '<', this.toTitleCase(topLimitString));
     }
     
     return query.limit(NUMBER_OF_ITEMS);
@@ -107,7 +108,6 @@ class FirebaseFilterSuggestion extends Component {
 
   render() {
     let suggestedItems = null;
-
     if (this.state.loadedItems) {
       suggestedItems = this.createSuggestedItems();
     }

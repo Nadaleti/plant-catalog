@@ -9,30 +9,30 @@ import SideDrawer from '../../UI/SideDrawer/SideDrawer';
 import classes from './FilterMobile.module.scss';
 
 const FilterMobile = (props) => {
-  const [showSelectedFilter, setShowSelectedFilterState] = useState(false);
+  const [showFilterItems, setshowFilterItemsState] = useState(false);
   const catalogContext = useContext(CatalogContext);
 
   const selectFilter = (displayValue, filterName, selectedFilter) => {
     catalogContext.selectFilter(displayValue, filterName, selectedFilter);
-    toggleSelectedFilter();
+    toggleShowFilterItems();
   };
 
-  const toggleSelectedFilter = () => {
-    setShowSelectedFilterState(!showSelectedFilter);
+  const toggleShowFilterItems = () => {
+    setshowFilterItemsState(!showFilterItems);
   };
 
   return (
     <Fragment>
-      <CatalogContext.Provider value={{selectFilter: selectFilter}}>
-        <SideDrawer show={showSelectedFilter} title={props.filterTitle} close={toggleSelectedFilter}>
-          {props.children}
-        </SideDrawer>
-      </CatalogContext.Provider>
-      <div className={classes.FilterMobile} onClick={toggleSelectedFilter}>
+      <div className={classes.FilterMobile} onClick={toggleShowFilterItems}>
         {props.filterTitle}
         <span className={classes.SelectedFilter}>{props.selectedFilterValue}</span>
         <FontAwesomeIcon className={classes.RightArrow} icon={faChevronRight} />
       </div>
+      <CatalogContext.Provider value={{selectFilter: selectFilter}}>
+        <SideDrawer show={showFilterItems} title={props.filterTitle} close={toggleShowFilterItems}>
+          {props.children}
+        </SideDrawer>
+      </CatalogContext.Provider>
     </Fragment>
   )
 }

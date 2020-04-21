@@ -1,8 +1,9 @@
 import React, { memo } from 'react';
 
-import Backdrop from '../Backdrop/Backdrop';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import Backdrop from '../Backdrop/Backdrop';
 import ModalOverlay from './ModalOverlay/ModalOverlay';
 
 import classes from './Modal.module.scss';

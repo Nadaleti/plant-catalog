@@ -1,8 +1,8 @@
 import React from 'react';
 
-import GenusesFilterSuggestion from '../../FirebaseFilter/GenusesFilter/GenusesFilterSuggestion';
 import FilterMobile from '../FilterMobile';
 import FilterGenusComponent from '../../../base-components/FilterGenusComponent';
+import GenusesFilterSuggestion from '../../FirebaseFilter/GenusesFilter/GenusesFilterSuggestion';
 
 const genusesFilterMobile = (props) => {
   return (
