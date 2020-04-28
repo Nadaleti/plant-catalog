@@ -11,7 +11,6 @@ import classes from './PlantCatalog.module.scss';
 export default class PlantCatalog extends Component {
   state = {
     selectedFilters: [],
-    plantName: null,
     plants: null,
     shouldShowMobileFilters: false
   };
@@ -20,17 +19,11 @@ export default class PlantCatalog extends Component {
     return nextState.plants !== this.plants;
   }
 
-  filterClickHandler = (displayValue, filterName, selectedFilter) => {
+  filterClickHandler = (selectedFilter) => {
     let selectedFilters = [...this.state.selectedFilters];
 
-    this.removeFilter(filterName, selectedFilters);
-
-    selectedFilters.push({
-      displayValue: displayValue,
-      filterName: filterName,
-      value: selectedFilter
-    });
-
+    this.removeFilter(selectedFilter.filterName, selectedFilters);
+    selectedFilters.push(selectedFilter);
     this.setState({selectedFilters: selectedFilters});
   }
 
@@ -38,8 +31,12 @@ export default class PlantCatalog extends Component {
     const selectedFilters = [...this.state.selectedFilters];
 
     this.removeFilter(filterName, selectedFilters);
+    this.setState({selectedFilters: selectedFilters});
+  }
 
-    this.setState({selectedFilters: selectedFilters})
+  loadPlants = () => {
+    console.log('Wait a minute, we\'re loading the plants...');
+    console.log(this.state.selectedFilters);
   }
 
   removeFilter = (filterName, filterList) => {
@@ -51,12 +48,12 @@ export default class PlantCatalog extends Component {
     }
   }
 
-  plantNameUpdateHandler = (plantName) => {
-    this.setState({ plantName: plantName });
-  }
+  searchbarSubmitHandler = (selectedFilter) => {
+    let selectedFilters = [...this.state.selectedFilters];
 
-  searchPlants = () => {
-    console.log(this.state);
+    this.removeFilter(selectedFilter.filterName, selectedFilters);
+    selectedFilters.push(selectedFilter);
+    this.setState({selectedFilters: selectedFilters}, () => this.loadPlants());
   }
 
   toggleMobileFilters = () => {
@@ -69,8 +66,7 @@ export default class PlantCatalog extends Component {
     const providedContext = {
       removeFilter: this.filterRemoveClickHandler,
       selectFilter: this.filterClickHandler,
-      submit: this.searchPlants,
-      updatePlantName: this.plantNameUpdateHandler
+      submit: this.searchbarSubmitHandler
     }
 
     const dataContainer = <div className={classes.DataContainer}>

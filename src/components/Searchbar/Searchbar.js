@@ -13,12 +13,16 @@ class Searchbar extends Component {
   static contextType = CatalogContext;
   
   inputChangeHandler = (event) => {
-    this.context.updatePlantName(event.target.value);
+    this.plantName = event.target.value;
   }
 
   searchSubmitHandler = (event) => {
     event.preventDefault();
-    this.context.submit();
+    this.context.submit({
+      displayValue: this.plantName,
+      filterName: 'plant name',
+      value: this.plantName
+    });
   }
 
   render() {
