@@ -2,7 +2,6 @@ import React from 'react';
 
 import FamiliesFilterMobile from '../../../Filters/FilterMobile/FamiliesFilterMobile/FamiliesFilterMobile';
 import FilterMobileWrapper from '../../../Filters/FilterMobile/FilterMobileWrapper/FilterMobileWrapper';
-import GenusesFilterMobile from '../../../Filters/FilterMobile/GenusesFilterMobile/GenusesFilterMobile';
 import SideDrawer from '../../../UI/SideDrawer/SideDrawer';
 
 const plantCatalogMobileFilters = (props) => {
@@ -15,7 +14,6 @@ const plantCatalogMobileFilters = (props) => {
     >
       <FilterMobileWrapper>
         <FamiliesFilterMobile selectedFilters={props.selectedFilters} />
-        <GenusesFilterMobile selectedFilters={props.selectedFilters} />
       </FilterMobileWrapper>
     </SideDrawer>
   )

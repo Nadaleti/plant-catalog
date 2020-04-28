@@ -6,7 +6,7 @@ import Modal from '../../UI/Modal/Modal';
 
 import classes from './FirebaseFilter.module.scss';
 
-const NUMBER_OF_ITEMS = 10;
+const NUMBER_OF_ITEMS = 15;
 
 export default class FirebaseFilter extends Component {
   state = {
@@ -28,8 +28,12 @@ export default class FirebaseFilter extends Component {
   }
 
   getFixedItemsList = () => {
-    const fixedItemsList = this.state.fixedItems.map((item) => <li key={item.id}
-      onClick={() => this.context.selectFilter(item[this.props.displayProperty], this.props.filterName, item)}>{item.name}</li>);
+    const fixedItemsList = this.state.fixedItems.map((item) =>
+      <li
+        key={item.id}
+        onClick={() => this.filterClickHandler(item)}>
+          {this.props.filterDisplayValue(item)}
+      </li>);
 
     if (this.state.fixedItems && this.state.fixedItems.length === NUMBER_OF_ITEMS && fixedItemsList) {
       fixedItemsList.push(
@@ -61,10 +65,18 @@ export default class FirebaseFilter extends Component {
     this.setState({showMoreFilterItems: false});
   }
 
+  filterClickHandler = (item) => {
+    this.context.selectFilter({
+      displayValue: this.props.filterDisplayValue(item),
+      filterName: this.props.filterName,
+      value: this.props.filterValue(item)
+    })
+  };
+
   render() {
     const providedContext = {
-      selectFilter: (displayValue, filterName, selectedFilter) => {
-        this.context.selectFilter(displayValue, filterName, selectedFilter);
+      selectFilter: (selectedFilter) => {
+        this.context.selectFilter(selectedFilter);
         this.closeMoreFilterItems();
       }
     };
