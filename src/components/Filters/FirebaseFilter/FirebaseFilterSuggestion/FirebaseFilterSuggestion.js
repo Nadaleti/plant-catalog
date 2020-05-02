@@ -94,7 +94,7 @@ class FirebaseFilterSuggestion extends Component {
             key={item.id}
             className={classes.SuggestionItem}
             onClick={() => this.filterClickHandler(item)}>
-            {item.name}
+            {this.props.filterDisplayValue(item)}
           </li>)}
       </ul>;
     }
@@ -103,9 +103,9 @@ class FirebaseFilterSuggestion extends Component {
   filterClickHandler = (item) => {
     this.setState({searchTerm: ''}, () => this.loadItems());
     this.context.selectFilter({
-      displayValue: item.name,
+      displayValue: this.props.filterDisplayValue(item),
       filterName: this.props.filterName,
-      value: item
+      value: this.props.filterValue(item)
     });
   }
 
