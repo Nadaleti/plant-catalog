@@ -18,7 +18,7 @@ class Searchbar extends Component {
 
   searchSubmitHandler = (event) => {
     event.preventDefault();
-    this.context.submit({
+    this.context.selectFilter({
       displayValue: this.plantName,
       filterName: 'plant name',
       value: this.plantName
