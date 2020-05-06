@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import CatalogContext from '../../../../context/catalog-context';
+import { toTitleCase } from '../../../../utils/string.utils';
 
 import classes from './FirebaseFilterSuggestion.module.scss';
 
@@ -33,8 +34,8 @@ class FirebaseFilterSuggestion extends Component {
       const topLimitString = this.getTopLimitString(this.state.searchTerm);
 
       query = query
-        .where('name', '>=', this.toTitleCase(this.state.searchTerm))
-        .where('name', '<', this.toTitleCase(topLimitString));
+        .where('name', '>=', toTitleCase(this.state.searchTerm))
+        .where('name', '<', toTitleCase(topLimitString));
     }
     
     return query.limit(NUMBER_OF_ITEMS);
@@ -46,7 +47,7 @@ class FirebaseFilterSuggestion extends Component {
 
     sentenceWords[length - 1] = (parseInt(sentenceWords[length - 1], 36) + 1).toString(36);
 
-    return this.toTitleCase(sentenceWords.join(' '));
+    return toTitleCase(sentenceWords.join(' '));
   }
   
   inputChangeHandler = (searchTerm) => {
@@ -72,16 +73,6 @@ class FirebaseFilterSuggestion extends Component {
           loadedItems: loadedItems
         });
       });
-  }
-
-  toTitleCase = (sentence) => {
-    const sentenceWords = sentence.split(' ');
-    
-    for (let i = 0; i < sentenceWords.length; i++) {
-      sentenceWords[i] = sentenceWords[i].charAt(0).toUpperCase() + sentenceWords[i].slice(1);
-    }
-
-    return sentenceWords.join(' ');
   }
 
   createSuggestedItems = () => {
