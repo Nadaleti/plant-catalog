@@ -1,0 +1,25 @@
+/* =================================
+
+Text loading - Facebook like
+
+==================================== */
+
+.LabelLoading {
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: placeholderShimmer;
+  animation-timing-function: linear;
+  background: #e6e6e6;
+  background: linear-gradient(to right, #e6e6e6 8%, #e0e0e0 18%, #e6e6e6 33%);
+  height: 1.1rem;
+}
+
+@keyframes placeholderShimmer {
+  0% {
+    background-position: -468px 0;
+  }
+  100% {
+    background-position: 468px 0;
+  }
+}
