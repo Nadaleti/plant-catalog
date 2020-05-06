@@ -32,7 +32,7 @@ class TrefleQueryList extends Component {
         TrefleAxios.get(urlWithParams, {headers: {'Authorization': `Bearer ${appToken}`}})
           .then((response) => this.setState({items: response.data}))
       )
-      .catch((error) => {})
+      .catch((_) => {})
   }
 
   getQueryParams = () => {
