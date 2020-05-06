@@ -1,0 +1,56 @@
+@import '../../styles/colors';
+@import '../../styles/loading';
+
+.PlantCard {
+  display: flex;
+  flex-direction: column;
+  width: 280px;
+  height: 300px;
+  background-color: #fff;
+  border-radius: 6px;
+  overflow: hidden;
+
+  >.PlantCardImageContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    overflow: hidden;
+
+    >.PlantImage {
+      height: 100%;
+    }
+  }
+
+  >.PlantCardContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: fit-content;
+    min-height: 15%;
+    font-family: 'Arvo', sans-serif;
+    border-top: 1px solid #DDD;
+    padding: 10px;
+    
+    >.ScientificName {
+      font-size: 1rem;
+      margin-bottom: .5rem;
+
+      &.Loading {
+        width: 100%;
+        @extend .LabelLoading;
+      }
+    }
+
+    >.CommonName {
+      color: $faded-text;
+      font-size: .9rem;
+      font-style: italic;
+
+      &.Loading {
+        width: 90%;
+        @extend .LabelLoading;
+      }
+    }
+  }
+}
