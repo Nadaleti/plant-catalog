@@ -1,5 +1,6 @@
 import React from 'react';
 
+import noImageFound from '../../assets/leafs.png';
 import { toTitleCase } from '../../utils/string.utils';
 import LoadSpinner from '../UI/LoadSpinner/LoadSpinner';
 import TrefleQueryItem from '../base-components/query-components/Trefle/TrefleQueryItem';
@@ -10,7 +11,10 @@ const plantCard = (props) => {
 
   const getImage = (item) => {
     if (item.images.length === 0) {
-      return null;
+      return <div className={classes.NoImageFound}>
+        <img src={noImageFound} />
+        <p>No image found :(</p>
+      </div>;
     }
 
     return <img src={getImageUrl(item)} className={classes.PlantImage} />;

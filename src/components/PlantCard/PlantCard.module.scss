@@ -15,10 +15,24 @@
     justify-content: center;
     align-items: center;
     flex-grow: 1;
+    background-color: #f0f0f0;
     overflow: hidden;
 
     >.PlantImage {
       height: 100%;
+    }
+
+    >.NoImageFound {
+      img {
+        width: 80px;
+        height: auto;
+        filter: grayscale(100%);
+      }
+
+      p {
+        color: $dark-grey;
+        font-weight: bold;
+      }
     }
   }
 
